@@ -9,6 +9,9 @@ const Coupon = (): JSX.Element => {
   return (
     <View className="flex flex-row">
       <View>
+        <Text className="absolute left-2 top-14 z-10 -rotate-90 text-base font-bold text-white">
+          CUPOM
+        </Text>
         <CouponLeftBg height="120" width="70" />
       </View>
       <View className="w-72 rounded-r-2xl border-slate-400 bg-white p-3">
