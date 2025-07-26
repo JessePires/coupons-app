@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import Coupon from './coupon/coupon.component';
 
 // import { EditScreenInfo } from './EditScreenInfo';
@@ -9,6 +9,24 @@ type ScreenContentProps = {
   children?: React.ReactNode;
 };
 
+const couponsData = [
+  {
+    id: 1,
+    titulo: 'Bella Napoli Pizzaria',
+    descricao: '🎁 15% OFF em pedidos acima de R$ 50',
+    categoria: 'Restaurante',
+    validade: '21-07-2025',
+  },
+
+  {
+    id: 2,
+    titulo: 'Bella Napoli Pizzaria',
+    descricao: '🎁 15% OFF em pedidos acima de R$ 50',
+    categoria: 'Restaurante',
+    validade: '21-08-2025',
+  },
+];
+
 export const ScreenContent = ({ title, path, children }: ScreenContentProps) => {
   return (
     <View className={styles.container}>
@@ -16,7 +34,16 @@ export const ScreenContent = ({ title, path, children }: ScreenContentProps) => 
       <View className={styles.separator} />
       <EditScreenInfo path={path} />
       {children} */}
-      <Coupon />
+      <FlatList
+        className="pt-8"
+        data={couponsData}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={(item) => {
+          return <Coupon {...item.item} />;
+        }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
     </View>
   );
 };
