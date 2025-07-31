@@ -3,4 +3,5 @@ export interface CouponProps {
   descricao: string;
   categoria: string;
   validade: string;
+  onPressViewCoupon: () => void;
 }

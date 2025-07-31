@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HeaderButton } from '../components/HeaderButton';
 import { TabBarIcon } from '../components/TabBarIcon';
-import One from '../screens/one';
+
 import Two from '../screens/two';
+import Home from '~/screens/home';
 
 const Tab = createBottomTabNavigator({
   screenOptions: function ScreenOptions() {
@@ -12,11 +13,12 @@ const Tab = createBottomTabNavigator({
   },
   screens: {
     One: {
-      screen: One,
+      screen: Home,
       options: ({ navigation }) => ({
-        title: 'Tab One',
+        title: 'Home',
         tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         headerRight: () => <HeaderButton onPress={() => navigation.navigate('Modal')} />,
+        headerShown: false,
       }),
     },
     Two: {
