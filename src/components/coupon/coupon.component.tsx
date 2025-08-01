@@ -7,7 +7,7 @@ import { customFormatDate } from '~/utils/date.utils';
 
 const Coupon = (props: CouponProps): JSX.Element => {
   return (
-    <View className="mr-2 flex h-[120px] flex-row">
+    <View className={`ml-4 flex h-[120px] flex-row ${props.isLastChild ? 'mr-4' : ''}`}>
       <View>
         <Text className="absolute left-3 top-14 z-10 -rotate-90 text-base font-bold text-white">
           CUPOM

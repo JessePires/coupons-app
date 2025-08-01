@@ -1,7 +1,7 @@
 import Coupon from '~/components/coupon/coupon.component';
 import { JSX } from 'react';
 
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { FlatList, Image, SafeAreaView, Text, View } from 'react-native';
 
 const couponsData = [
   {
@@ -30,26 +30,44 @@ const Home = (): JSX.Element => {
       <EditScreenInfo path={path} />
       {children} */}
 
+      <Image
+        className="ml-4 mr-4 flex h-[150px] w-[95%] items-center justify-center rounded-lg"
+        source={require('../assets/homeBanner.png')}
+        resizeMode="cover"
+      />
+
       <View className="h-48 gap-3">
-        <Text className="text-base font-bold text-neutral-900">Recomendados para você</Text>
+        <Text className="ml-4  text-base font-bold text-neutral-900">Recomendados para você</Text>
         <FlatList
           data={couponsData}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={(item) => {
-            return <Coupon {...item.item} onPressViewCoupon={() => console.log('Pressed')} />;
+          keyExtractor={(item) => {
+            return item.id.toString();
           }}
+          renderItem={(item) => (
+            <Coupon
+              {...item.item}
+              onPressViewCoupon={() => console.log('Pressed')}
+              isLastChild={item.index === couponsData.length - 1}
+            />
+          )}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
       </View>
       <View className="h-48 gap-3">
-        <Text className="text-base font-bold text-neutral-900">Aproveite antes que acabe!</Text>
+        <Text className="ml-4 text-base font-bold text-neutral-900">
+          Aproveite antes que acabe!
+        </Text>
         <FlatList
           data={couponsData}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={(item) => {
-            return <Coupon {...item.item} onPressViewCoupon={() => console.log('Pressed')} />;
-          }}
+          renderItem={(item) => (
+            <Coupon
+              {...item.item}
+              onPressViewCoupon={() => console.log('Pressed')}
+              isLastChild={item.index === couponsData.length - 1}
+            />
+          )}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
@@ -59,7 +77,7 @@ const Home = (): JSX.Element => {
 };
 
 const styles = {
-  container: `items-center flex-1 pt-8 pl-4`,
+  container: `items-center flex-1 pt-8`,
   separator: `h-[1px] my-7 w-4/5 bg-gray-200`,
   title: `text-xl font-bold`,
 };
