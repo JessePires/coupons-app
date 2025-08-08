@@ -4,16 +4,25 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import CouponLeftBg from '~/assets/CouponLeftBg';
 import Tag from '../tag/tag.component';
 import { customFormatDate } from '~/utils/date.utils';
+import WhiteCouponLeftBg from '~/assets/whiteCouponLeftBg';
 
-const Coupon = (props: CouponProps): JSX.Element => {
+const Coupon = ({ variant = 'primary', ...props }: CouponProps): JSX.Element => {
   return (
     <View className={`ml-4 flex h-[120px] flex-row ${props.isLastChild ? 'mr-4' : ''}`}>
-      <View>
-        <Text className="absolute left-3 top-14 z-10 -rotate-90 text-base font-bold text-white">
-          CUPOM
-        </Text>
-        <CouponLeftBg height="120" width="70" />
-      </View>
+      {variant && variant === 'primary' && (
+        <View>
+          <Text className="absolute left-3 top-14 z-10 -rotate-90 text-base font-bold text-white">
+            CUPOM
+          </Text>
+          <CouponLeftBg height="120" width="70" />
+        </View>
+      )}
+
+      {variant && variant === 'secondary' && (
+        <View>
+          <WhiteCouponLeftBg height="120" width="15" />
+        </View>
+      )}
       <View className="w-[220px] justify-between rounded-r-2xl border-slate-400 bg-white p-3">
         <View className="flex-row justify-between">
           <View>

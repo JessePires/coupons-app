@@ -5,4 +5,5 @@ export interface CouponProps {
   validade: string;
   isLastChild?: boolean;
   onPressViewCoupon: () => void;
+  variant?: 'primary' | 'secondary';
 }

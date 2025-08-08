@@ -7,10 +7,15 @@ import { useMemo } from 'react';
 import 'react-native-gesture-handler';
 
 import Navigation from './src/navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   const colorScheme = useColorScheme();
   const theme = useMemo(() => (colorScheme === 'dark' ? DarkTheme : DefaultTheme), [colorScheme]);
 
-  return <Navigation theme={theme} />;
+  return (
+    <SafeAreaProvider>
+      <Navigation theme={theme} />
+    </SafeAreaProvider>
+  );
 }
