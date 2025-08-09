@@ -14,7 +14,7 @@ import CarIcon from '~/assets/carIcon';
 import CustomBodyCard from '~/components/customBodyCard/customBodyCard.component';
 import Tag from '~/components/tag/tag.component';
 import PartnerStablishmentLogoIcon from '~/assets/partnerEstablishments';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '~/components/header/header.component';
 import LocalIcon from '~/assets/Local.icon';
 import MoneyIcon from '~/assets/money.icon';
