@@ -1,7 +1,7 @@
 import Coupon from '~/components/coupon/coupon.component';
 import { JSX } from 'react';
 
-import { FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import SimpleCard from '~/components/simpleCard/simpleCard.component';
 import { CategoryEnum, CategoryEnumLabels } from '~/utils/enums/category.enum';
 import BarberShopIcon from '~/assets/barberShop';
@@ -15,6 +15,9 @@ import CustomBodyCard from '~/components/customBodyCard/customBodyCard.component
 import Tag from '~/components/tag/tag.component';
 import PartnerStablishmentLogoIcon from '~/assets/partnerEstablishments';
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import Header from '~/components/header/header.component';
+import LocalIcon from '~/assets/Local.icon';
+import MoneyIcon from '~/assets/money.icon';
 
 const couponsData = [
   {
@@ -62,9 +65,8 @@ const icon = {
 };
 
 const Home = (): JSX.Element => {
-  const insets = useSafeAreaInsets();
-
   const homeSections = [
+    { type: 'header' },
     { type: 'banner' },
     { type: 'categories' },
     {
@@ -95,6 +97,28 @@ const Home = (): JSX.Element => {
 
   const renderItems = ({ item }: { item: (typeof homeSections)[number] }) => {
     switch (item.type) {
+      case 'header':
+        return (
+          <View className="mx-4 my-2">
+            <Header className="mb-2" />
+            <View className="mb-4 mt-2 flex-row justify-between">
+              <View className="flex-row items-center gap-1">
+                <LocalIcon width="19" height="19" />
+                <View>
+                  <Text className="text-xs text-neutral-600">Ofertas em</Text>
+                  <Text className="text-sm font-bold text-customOrange-600">Vila Mariana, SP</Text>
+                </View>
+              </View>
+              <View className="items-end">
+                <Text className="text-end text-xs text-neutral-600">Economia de</Text>
+                <Tag className="flex-row gap-2 border-customOrange-300 bg-customOrange-200 p-2">
+                  <MoneyIcon />
+                  <Text className="text-xs font-bold text-customOrange-600">R$ 146,00</Text>
+                </Tag>
+              </View>
+            </View>
+          </View>
+        );
       case 'banner':
         return (
           <Image
