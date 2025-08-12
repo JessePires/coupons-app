@@ -1,6 +1,6 @@
 import { JSX } from 'react';
 import { TouchableOpacity, View, Text } from 'react-native';
-// import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+
 const CustomTabBar = ({ state, descriptors, navigation }): JSX.Element => {
   return (
     <View
@@ -10,6 +10,7 @@ const CustomTabBar = ({ state, descriptors, navigation }): JSX.Element => {
         const label = options.tabBarLabel ?? options.title ?? route.name;
 
         const isFocused = state.index === index;
+        const isCouponsRoute = route.name === 'Coupons';
 
         const icon = options.tabBarIcon
           ? options.tabBarIcon({
@@ -32,9 +33,15 @@ const CustomTabBar = ({ state, descriptors, navigation }): JSX.Element => {
         };
 
         return (
-          <TouchableOpacity key={route.key} onPress={onPress} className="flex-1 items-center py-2">
-            {icon}
-            <Text className={isFocused ? 'text-[#EE4D2D]' : 'text-gray-500'}>{label}</Text>
+          <TouchableOpacity key={route.key} onPress={onPress} className="flex-1 items-center py-3">
+            <View
+              className={`${isCouponsRoute ? 'absolute bottom-6 size-16 items-center justify-center rounded-full border-[6px] border-white bg-customOrange-500' : ''} ${isCouponsRoute && isFocused ? 'bg-customOrange-600' : ''}`}>
+              {icon}
+            </View>
+            <Text
+              className={`mt-1 text-xs ${isFocused && !isCouponsRoute ? 'text-[#EE4D2D]' : 'text-gray-500'} ${isCouponsRoute ? 'top-[19px]' : ''}`}>
+              {label}
+            </Text>
           </TouchableOpacity>
         );
       })}
