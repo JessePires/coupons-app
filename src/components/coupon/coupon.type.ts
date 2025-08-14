@@ -6,4 +6,5 @@ export interface CouponProps {
   isLastChild?: boolean;
   onPressViewCoupon: () => void;
   variant?: 'primary' | 'secondary';
+  className?: string;
 }

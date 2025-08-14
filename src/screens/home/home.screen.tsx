@@ -1,7 +1,7 @@
 import Coupon from '~/components/coupon/coupon.component';
 import { JSX } from 'react';
 
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import SimpleCard from '~/components/simpleCard/simpleCard.component';
 import { CategoryEnum, CategoryEnumLabels } from '~/utils/enums/category.enum';
 import BarberShopIcon from '~/assets/barberShop';
@@ -18,6 +18,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '~/components/header/header.component';
 import LocalIcon from '~/assets/Local.icon';
 import MoneyIcon from '~/assets/money.icon';
+import * as Containers from './home.container';
+import { HomeContainerProps, HomeSectionsType } from './home.types';
 
 const couponsData = [
   {
@@ -65,37 +67,11 @@ const icon = {
 };
 
 const Home = (): JSX.Element => {
-  const homeSections = [
-    { type: 'header' },
-    { type: 'banner' },
-    { type: 'categories' },
-    {
-      type: 'partners',
-      title: 'Estabelecimentos parceiros perto de você',
-      data: partnerEstablishments,
-    },
-    {
-      type: 'section',
-      title: 'Recomendados para você',
-      data: couponsData,
-    },
-    {
-      type: 'section',
-      title: 'Aproveite antes que acabe!',
-      data: couponsData,
-    },
-    {
-      type: 'recentlyViewed',
-      title: 'Vistos recentemente',
-      data: couponsData,
-    },
-  ];
-
   const formatCouponsQuantity = (quantity: number): string => {
     return quantity > 1 || quantity === 0 ? `${quantity} cupons` : `${quantity} cupom`;
   };
 
-  const renderItems = ({ item }: { item: (typeof homeSections)[number] }) => {
+  const renderItems = ({ item }: { item: HomeSectionsType[][number] }) => {
     switch (item.type) {
       case 'header':
         return (
@@ -123,7 +99,7 @@ const Home = (): JSX.Element => {
         return (
           <Image
             className="ml-4 mr-4 flex h-[150px] w-[92%] items-center justify-center rounded-lg"
-            source={require('../assets/homeBanner.png')}
+            source={require('../../assets/homeBanner.png')}
             resizeMode="cover"
           />
         );
@@ -227,101 +203,45 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <SafeAreaView>
-      <FlatList
-        data={homeSections}
-        renderItem={renderItems}
-        keyExtractor={(_, index) => index.toString()}
-      />
-    </SafeAreaView>
+    <Containers.HomeContainer>
+      {(containerProps: HomeContainerProps) => {
+        const homeSections = [
+          { type: 'header' },
+          { type: 'banner' },
+          { type: 'categories' },
+          {
+            type: 'partners',
+            title: 'Estabelecimentos parceiros perto de você',
+            data: partnerEstablishments,
+          },
+          {
+            type: 'section',
+            title: 'Recomendados para você',
+            data: couponsData,
+          },
+          {
+            type: 'section',
+            title: 'Aproveite antes que acabe!',
+            data: couponsData,
+          },
+          {
+            type: 'recentlyViewed',
+            title: 'Vistos recentemente',
+            data: couponsData,
+          },
+        ];
 
-    // <FlatList className={styles.container}>
-    //   {/* <Text className={styles.title}>{title}</Text>
-    //   <View className={styles.separator} />
-    //   <EditScreenInfo path={path} />
-    //   {children} */}
-
-    //   <Image
-    //     className="ml-4 mr-4 flex h-[150px] w-[95%] items-center justify-center rounded-lg"
-    //     source={require('../assets/homeBanner.png')}
-    //     resizeMode="cover"
-    //   />
-
-    //   <View className="mt-4">
-    //     <FlatList
-    //       contentContainerStyle={{ alignItems: 'center' }}
-    //       data={categories}
-    //       keyExtractor={(item) => {
-    //         return item.id.toString();
-    //       }}
-    //       numColumns={3}
-    //       renderItem={(item) => {
-    //         return (
-    //           <SimpleCard
-    //             name={CategoryEnumLabels[item.item.name as keyof typeof CategoryEnum]}
-    //             icon={icon[item.item.name as keyof typeof CategoryEnum]}
-    //           />
-    //         );
-    //       }}
-    //     />
-    //   </View>
-
-    //   <View className="mt-4 h-48 gap-3">
-    //     <Text className="ml-4  text-base font-bold text-neutral-900">Recomendados para você</Text>
-    //     <FlatList
-    //       data={couponsData}
-    //       keyExtractor={(item) => {
-    //         return item.id.toString();
-    //       }}
-    //       renderItem={(item) => (
-    //         <Coupon
-    //           {...item.item}
-    //           onPressViewCoupon={() => console.log('Pressed')}
-    //           isLastChild={item.index === couponsData.length - 1}
-    //         />
-    //       )}
-    //       horizontal
-    //       showsHorizontalScrollIndicator={false}
-    //     />
-    //   </View>
-
-    //   <View className="mt-4 h-48 gap-3">
-    //     <Text className="ml-4  text-base font-bold text-neutral-900">Recomendados para você</Text>
-    //     <FlatList
-    //       data={couponsData}
-    //       keyExtractor={(item) => {
-    //         return item.id.toString();
-    //       }}
-    //       renderItem={(item) => (
-    //         <Coupon
-    //           {...item.item}
-    //           onPressViewCoupon={() => console.log('Pressed')}
-    //           isLastChild={item.index === couponsData.length - 1}
-    //         />
-    //       )}
-    //       horizontal
-    //       showsHorizontalScrollIndicator={false}
-    //     />
-    //   </View>
-    //   <View className="h-48 gap-3">
-    //     <Text className="ml-4 text-base font-bold text-neutral-900">
-    //       Aproveite antes que acabe!
-    //     </Text>
-    //     <FlatList
-    //       data={couponsData}
-    //       keyExtractor={(item) => item.id.toString()}
-    //       renderItem={(item) => (
-    //         <Coupon
-    //           {...item.item}
-    //           onPressViewCoupon={() => console.log('Pressed')}
-    //           isLastChild={item.index === couponsData.length - 1}
-    //         />
-    //       )}
-    //       horizontal
-    //       showsHorizontalScrollIndicator={false}
-    //     />
-    //   </View>
-    // </FlatList>
+        return (
+          <SafeAreaView>
+            <FlatList
+              data={homeSections}
+              renderItem={renderItems}
+              keyExtractor={(_, index) => index.toString()}
+            />
+          </SafeAreaView>
+        );
+      }}
+    </Containers.HomeContainer>
   );
 };
 

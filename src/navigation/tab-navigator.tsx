@@ -2,14 +2,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HeaderButton } from '../components/HeaderButton';
 
 import Two from '../screens/two';
-import Home from '~/screens/home';
+
 import CustomTabBar from './customTabBar.component';
 import HomeIcon from '~/assets/home.icon';
 import PlanIcon from '~/assets/plan.icon';
 import CouponsIcon from '~/assets/coupons.icon';
 import FavoritesIcon from '~/assets/favorites.icon';
 import ProfileIcon from '~/assets/profile.icon';
-import { View } from 'react-native';
+import Home from '~/screens/home/home.screen';
+import CouponsScreen from '~/screens/coupons/coupons.screen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -66,7 +67,7 @@ const Tab = () => {
       />
       <BottomTab.Screen
         name="Coupons"
-        component={Two}
+        component={CouponsScreen}
         options={{
           title: 'Cupons',
           headerTitleStyle: {
