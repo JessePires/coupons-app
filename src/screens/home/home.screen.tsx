@@ -169,6 +169,7 @@ const Home = (): JSX.Element => {
               renderItem={({ item: coupon, index }) => (
                 <Coupon
                   {...coupon}
+                  className="w-[280px]"
                   onPressViewCoupon={() => console.log('Pressed')}
                   isLastChild={index === item.data.length - 1}
                 />
@@ -190,6 +191,7 @@ const Home = (): JSX.Element => {
                 <Coupon
                   {...coupon}
                   variant="secondary"
+                  className="w-[280px]"
                   onPressViewCoupon={() => console.log('Pressed')}
                   isLastChild={index === item.data.length - 1}
                 />

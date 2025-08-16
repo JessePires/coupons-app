@@ -1,5 +1,5 @@
 import { JSX } from 'react';
-import { FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import * as Containers from './coupons.container';
 import { CouponsContainerProps } from './coupons.types';
 import { CategoryDTO } from '~/domain/categories/categories.dto';
@@ -7,6 +7,7 @@ import Tag from '~/components/tag/tag.component';
 import { CategoryEnum, CategoryEnumLabels } from '~/utils/enums/category.enum';
 import Coupon from '~/components/coupon/coupon.component';
 import CustomTextInput from '~/components/textInput/textInput.component';
+import SearchIcon from '~/assets/search.icon';
 
 const CouponsScreen = (): JSX.Element => {
   const renderCategory = (
@@ -34,7 +35,6 @@ const CouponsScreen = (): JSX.Element => {
   return (
     <Containers.CouponsContainer>
       {(containerProps: CouponsContainerProps) => {
-        console.log('container', containerProps);
         return (
           <View className="mt-6">
             <FlatList
@@ -56,20 +56,24 @@ const CouponsScreen = (): JSX.Element => {
               }}
             />
 
-            <CustomTextInput />
+            <CustomTextInput icon={<SearchIcon />} />
 
-            <FlatList
-              data={containerProps.coupons}
-              keyExtractor={(coupon) => coupon.id.toString()}
-              renderItem={({ item: coupon, index }) => (
-                <Coupon
-                  variant="secondary"
-                  {...coupon}
-                  onPressViewCoupon={() => console.log('Pressed')}
-                  isLastChild={index === containerProps.coupons.length - 1}
-                />
-              )}
-            />
+            <View className="w-[100%] items-center">
+              <FlatList
+                contentContainerClassName="gap-4"
+                data={containerProps.coupons}
+                keyExtractor={(coupon) => coupon.id.toString()}
+                renderItem={({ item: coupon, index }) => (
+                  <Coupon
+                    variant="secondary"
+                    {...coupon}
+                    className="w-[94%]"
+                    onPressViewCoupon={() => containerProps.actions.handlePressSeeCouponDetails(1)}
+                    isLastChild={index === containerProps.coupons.length - 1}
+                  />
+                )}
+              />
+            </View>
           </View>
         );
       }}

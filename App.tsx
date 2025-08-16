@@ -1,13 +1,13 @@
 import './global.css';
 
-import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { DefaultTheme, DarkTheme, NavigationContainer } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 import { useMemo } from 'react';
 
 import 'react-native-gesture-handler';
 
-import Navigation from './src/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import StackNavigator from '~/navigation/stack-navigator';
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -15,7 +15,9 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <Navigation theme={theme} />
+      <NavigationContainer theme={theme}>
+        <StackNavigator />
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }

@@ -6,5 +6,6 @@ export interface CouponsContainerProps {
   coupons: any[];
   actions: {
     onPressCategory: (category: CategoryDTO) => void;
+    handlePressSeeCouponDetails: (id: number) => void;
   };
 }

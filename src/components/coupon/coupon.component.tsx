@@ -8,7 +8,8 @@ import WhiteCouponLeftBg from '~/assets/whiteCouponLeftBg';
 
 const Coupon = ({ variant = 'primary', ...props }: CouponProps): JSX.Element => {
   return (
-    <View className={`ml-4 flex h-[120px] flex-row ${props.isLastChild ? 'mr-4' : ''}`}>
+    <View
+      className={`ml-4 flex h-[120px] flex-row ${props.isLastChild ? 'mr-4' : ''} ${props.className}`}>
       {variant && variant === 'primary' && (
         <View>
           <Text className="absolute left-3 top-14 z-10 -rotate-90 text-base font-bold text-white">
@@ -23,7 +24,8 @@ const Coupon = ({ variant = 'primary', ...props }: CouponProps): JSX.Element => 
           <WhiteCouponLeftBg height="120" width="15" />
         </View>
       )}
-      <View className="w-[220px] justify-between rounded-r-2xl border-slate-400 bg-white p-3">
+      <View
+        className={`${variant === 'secondary' ? 'w-[95%]' : 'w-[75%]'} ${props.contentClassName} justify-between rounded-r-2xl border-slate-400 bg-white p-3`}>
         <View className="flex-row justify-between">
           <View>
             <Text className="text-[12px] text-neutral-800" testID="couponTitle">

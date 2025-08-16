@@ -5,6 +5,7 @@ import { CategoryDTO } from '~/domain/categories/categories.dto';
 import { CouponsContainerProps } from './coupons.types';
 import { CategoriesController } from '~/domain/categories/categories.controller';
 import { CouponsController } from '~/domain/coupon/coupon.controller';
+import { useNavigation } from '@react-navigation/native';
 
 export const CouponsContainer = (props: ContainerWithProps<CouponsContainerProps>): JSX.Element => {
   const categoriesController = new CategoriesController();
@@ -13,6 +14,8 @@ export const CouponsContainer = (props: ContainerWithProps<CouponsContainerProps
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
   const [coupons, setCoupons] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<CategoryDTO>();
+
+  const navigation = useNavigation();
 
   const getCategories = async (): Promise<void> => {
     try {
@@ -44,6 +47,10 @@ export const CouponsContainer = (props: ContainerWithProps<CouponsContainerProps
     }
   };
 
+  const handlePressSeeCouponDetails = () => {
+    navigation.navigate('CouponDetail');
+  };
+
   useEffect(() => {
     getCategories();
   }, []);
@@ -52,5 +59,10 @@ export const CouponsContainer = (props: ContainerWithProps<CouponsContainerProps
     getCoupons();
   }, [selectedCategory]);
 
-  return props.children({ categories, selectedCategory, coupons, actions: { onPressCategory } });
+  return props.children({
+    categories,
+    selectedCategory,
+    coupons,
+    actions: { onPressCategory, handlePressSeeCouponDetails },
+  });
 };
